@@ -1,0 +1,13 @@
+programa {
+  funcao inicio() {
+    real n, m
+    inteiro co
+    para(co=1 ; co<=5; co++){
+    escreva("informe a ",co,"* nota")
+    leia(n)
+    m=m + n
+    m = m/5
+    }
+  }
+}
+
