@@ -1,0 +1,69 @@
+/*
+O objetivo desta prova é verificar a compreensão dos comandos básicos de manipulação de tabelas
+e não aprofundar em conceitos mais avançados.
+*/
+
+-- Comando para criar a tabela de pedidos INICIAL (com alguns nomes de coluna incorretos)
+CREATE TABLE pedidos_feitos (
+    num_pedido INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT NOT NULL,
+    data_ped DATE,
+    valor_total_ped DECIMAL(10, 2)
+);
+
+-- Inserindo alguns dados de exemplo INICIAIS
+INSERT INTO pedidos_feitos (id_cliente, data_ped, valor_total_ped) VALUES
+(1, '2025-05-05', 150.00),
+(2, '2025-05-06', 220.50),
+(1, '2025-05-07', 85.99);
+
+-- Altera o nome das colunas
+ ALTER TABLE pedidos_feitos
+  CHANGE COLUMN id_cliente cliente_id INT;
+  
+ ALTER TABLE pedidos_feitos
+  CHANGE COLUMN data_ped data_pedido DATE;
+ 
+ ALTER TABLE pedidos_feitos
+  CHANGE COLUMN valor_total_ped valor_total DECIMAL(10, 2);
+  
+INSERT INTO pedidos_feitos (cliente_id, data_pedido, valor_total) VALUES
+(3, '2025-05-08', 310.75),
+(2, '2025-05-09', 55.00),
+(1, '2025-05-10', 123.45),
+(3, '2025-06-13', 32.99),
+(2, '2025-06-14', 42.50);
+
+ ALTER TABLE pedidos_feitos
+  ADD COLUMN status_pedido VARCHAR(50);
+  
+UPDATE pedidos_feitos SET status_pedido = "processando" WHERE num_pedido = 1;
+UPDATE pedidos_feitos SET status_pedido = "Enviado" WHERE num_pedido = 2;
+UPDATE pedidos_feitos SET status_pedido = "Entregue" WHERE num_pedido = 3;
+UPDATE pedidos_feitos SET status_pedido = "Pendente" WHERE num_pedido = 4;
+UPDATE pedidos_feitos SET status_pedido = "Enviado" WHERE num_pedido = 5;
+  
+  
+-- Exibindo a tabela inicial para visualização
+SELECT * FROM pedidos_feitos;
+
+
+/*
+-- Com base na tabela pedidos_feitos criada acima, vocês deverão executar os seguintes comandos SQL:
+
+-- a) Alterar o nome da coluna id_cliente para cliente_id: =====
+-- b) Alterar o nome da coluna data_ped para data_pedido: =====
+-- c) Alterar o nome da coluna valor_total_ped para valor_total: =====
+-- d) Inserir um novo pedido na tabela:
+        - pedido 1: cliente ID 3, data 2025-05-08, valor total R$ 310.75 =====
+        - pedido 2: cliente ID 2, data 2025-05-09, valor total R$ 55.00 =====
+        - pedido 3: cliente ID 1, data 2025-05-10, valor total R$ 123.45 =====
+-- e) Inserir mais dois pedidos de uma vez: -----
+-- f) Adicionar uma nova coluna chamada status_pedido com o tipo de dado VARCHAR(50):
+-- g) Atualizar a coluna status_pedido para os pedidos existentes (defina status arbitrários como 'Pendente', 'Enviado', 'Entregue'):
+        - pedido numero 1 deve receber o status 'Processando'
+        - pedido numero 2 deve receber o status 'Enviado'
+        - pedido numero 3 deve receber o status 'Entregue'
+        - pedido numero 4 deve receber o status 'Pendente'
+        - pedido numero 5 deve receber o status 'Enviado'
+*/
